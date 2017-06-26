@@ -1,0 +1,9 @@
+{
+  "name": "serverless-story-sizing",
+  "version": "0.0.1",
+  "description": "Hack to size stories from trello",
+  "main": "index.js",
+  "repository": "https://github.com/josephsromero/serverless-story-sizing.git",
+  "author": "Joe <joseph.romero@utexas.edu>",
+  "license": "MIT"
+}

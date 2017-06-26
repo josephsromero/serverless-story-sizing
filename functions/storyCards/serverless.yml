@@ -1,0 +1,37 @@
+# Welcome to Serverless!
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: storyCards
+
+#Custom Configuration variables
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  profile: personal
+  region: us-east-1
+  environment:
+    TRELLO_SECRET_KEY: ${self:custom.secrets.trelloSecretKey}
+
+functions:
+  getStoryCards:
+    handler: storyCards.get
+    events:
+      - http:
+          path: storyCards/get
+          method: get
+          cors: true
+  updateStoryPoints:
+    handler: storyCards.update
+    events:
+      - http:
+          path: storyCard/put
+          method: put
+          cors: true
