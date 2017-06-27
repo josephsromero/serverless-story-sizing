@@ -3,13 +3,8 @@ import StartButton from './components/button/StartButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import logo from './Texas_Longhorns_logo.svg';
 import './App.css';
-import devConfig from './config';
 
-export default class App extends Component {
-
-  startSizing () {
-    // here we have a full screen modal view with card and text and swipe left or right capabilities 
-  }
+export default class App extends Component { 
 
   render() {
     return (
