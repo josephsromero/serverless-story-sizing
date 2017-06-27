@@ -9,7 +9,7 @@ service: storyCards
 
 #Custom Configuration variables
 custom:
-  secrets: ${file(secrets.json)}
+  config: ${file(config.json)}
 
 provider:
   name: aws
@@ -18,7 +18,7 @@ provider:
   profile: personal
   region: us-east-1
   environment:
-    TRELLO_SECRET_KEY: ${self:custom.secrets.trelloSecretKey}
+    TRELLO_SECRET_KEY: ${self:custom.config.trelloApiKey}
 
 functions:
   getStoryCards:

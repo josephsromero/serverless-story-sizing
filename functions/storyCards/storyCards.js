@@ -1,27 +1,34 @@
 'use strict';
-
-const trello = require('trello')(process.env.TRELLO_SECRET_KEY);
+const Trello = require("trello");
 
 // Function: storyCards.get
 // This is the function to get all story cards that need sizing 
 // NOTE: this does not prune the list of cards so it will grab all cards from a board atm 
 module.exports.get = (event, context, callback) => {
   const requestBody = JSON.parse(event.body);
-  const token = requestBody.token.id;
+  const token = requestBody.token;
+  const boardId = requestBody.boardId;
   
-  const response = {
-    statusCode: 200,
-    headers: {
-          'Access-Control-Allow-Origin': '*',
-    },
-    body: JSON.stringify({
-      message: 'Get happened!',
-      input: event,
-    }),
-  };
-  callback(null, response);
+  const trelloApi = new Trello(process.env.TRELLO_API_KEY, token);
+  var cardsPromise = trelloApi.getCardsonBoard(boardId);
+  cardsPromise.then((cards) => {
+    console.log("cards");
+    const response = {
+      statusCode: 200,
+      headers: {
+            'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({
+        message: 'Got all of the cards on the board!',
+        cards,
+      }),
+    };
+    callback(null, response);
+  });
 };
 
+// Function: storyCards.update
+// This is the function to update a story cards points label 
 module.exports.update = (event, context, callback) => {
   const response = {
     statusCode: 200,
