@@ -4,7 +4,6 @@
 #    docs.serverless.com
 #
 # Happy Coding!
-
 service: storyCards
 
 #Custom Configuration variables
@@ -18,7 +17,7 @@ provider:
   profile: personal
   region: us-east-1
   environment:
-    TRELLO_SECRET_KEY: ${self:custom.config.trelloApiKey}
+    TRELLO_API_KEY: ${self:custom.config.trelloApiKey}
 
 functions:
   getStoryCards:
@@ -26,12 +25,5 @@ functions:
     events:
       - http:
           path: storyCards/get
-          method: get
-          cors: true
-  updateStoryPoints:
-    handler: storyCards.update
-    events:
-      - http:
-          path: storyCard/put
-          method: put
+          method: post
           cors: true

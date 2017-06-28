@@ -10,13 +10,12 @@ module.exports.get = (event, context, callback) => {
   const boardId = requestBody.boardId;
   
   const trelloApi = new Trello(process.env.TRELLO_API_KEY, token);
-  var cardsPromise = trelloApi.getCardsonBoard(boardId);
+  var cardsPromise = trelloApi.getCardsOnBoard(boardId);
   cardsPromise.then((cards) => {
-    console.log("cards");
     const response = {
       statusCode: 200,
       headers: {
-            'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
         message: 'Got all of the cards on the board!',
@@ -25,18 +24,4 @@ module.exports.get = (event, context, callback) => {
     };
     callback(null, response);
   });
-};
-
-// Function: storyCards.update
-// This is the function to update a story cards points label 
-module.exports.update = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Put!',
-      input: event,
-    }),
-  };
-
-  callback(null, response);
 };
